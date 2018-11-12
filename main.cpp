@@ -1,6 +1,7 @@
 #include <iostream>
 #include "graph.h"
 #include "node.h"
+#include "edge.h"
 
 using namespace std;
 
@@ -20,6 +21,13 @@ int main()
     myGraph.print();
     myGraph.find("A")->traverse();
     myGraph.find("D")->traverse();
+
+    cout << endl;
+    vector<Edge*> path = myGraph.find("C")->dijkstra(myGraph.find("D"));
+    for (unsigned i=0; i<path.size(); i++) {
+        cout << path[i]->fromNode->name << path[i]->toNode->name << " " << path[i]->weight << endl;
+
+    }
 
     return 0;
 }

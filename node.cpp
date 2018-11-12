@@ -76,3 +76,36 @@ void Node::traverse(vector<Node*> path, float weightTotal)
         edges[i]->toNode->traverse(path, weightTotal+edges[i]->weight);
     }
 }
+
+Node::Path Node::dijkstra(Node* target)
+{
+    priority_queue<Path> pathQueue;
+    visited = true;
+    for (unsigned i=0; i<edges.size(); i++){
+        Path path;
+        path.push_back(edges[i]);
+        pathQueue.push(path);
+    }
+    Path currentPath;
+    while (!pathQueue.empty()) {  // continue as long as there is something in the queue
+        currentPath = pathQueue.top();  // get the next Path in the queue
+        if (currentPath.back()->toNode == target) {
+            break;  // stop if we found the target
+        }
+        pathQueue.pop();
+        currentPath.back()->toNode->dijkstra(pathQueue, currentPath);  // go to the next Node and add new Paths
+    }
+    return currentPath;
+}
+
+void Node::dijkstra(priority_queue<Node::Path>& pathQueue, Path current)
+{
+    if (visited)
+        return;
+    visited = true;
+    for (unsigned i=0; i<edges.size(); i++){
+        Path path(current);  // makes a copy of the Path so far
+        path.push_back(edges[i]);  // expands the Path by adding a new Edge
+        pathQueue.push(path);  // add the new Path into the queue
+    }
+}
