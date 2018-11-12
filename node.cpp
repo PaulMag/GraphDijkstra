@@ -89,13 +89,9 @@ bool operator<(const Path& a, const Path& b)
 Path Node::dijkstra(Node* target)
 {
     priority_queue<Path> pathQueue;
-    visited = true;
-    for (unsigned i=0; i<edges.size(); i++){
-        Path path;
-        path.push_back(edges[i]);
-        pathQueue.push(path);
-    }
     Path currentPath;
+    dijkstra(pathQueue, currentPath);  // visit this Node first
+
     while (!pathQueue.empty()) {  // continue as long as there is something in the queue
         currentPath = pathQueue.top();  // get the next Path in the queue
         if (currentPath.back()->toNode == target) {
