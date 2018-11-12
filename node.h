@@ -6,6 +6,7 @@
 class Edge;
 class Path;
 #include <queue>
+#include <functional>
 
 using namespace std;
 
@@ -26,7 +27,7 @@ public:
     void traverse();
     void traverse(vector<Node*> path, float weightTotal);
     Path dijkstra(Node* target);
-    void dijkstra(priority_queue<Path>& pathQueue, Path current);
+    void dijkstra(priority_queue<Path, vector<Path>, greater<Path>>& pathQueue, Path current);
 };
 
 #endif // NODE_H

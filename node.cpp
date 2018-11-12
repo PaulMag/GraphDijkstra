@@ -80,7 +80,14 @@ void Node::traverse(vector<Node*> path, float weightTotal)
 
 bool operator<(const Path& a, const Path& b)
 {
-    if (a.edges.size() < b.edges.size())
+    if (a.getWeight() < b.getWeight())
+        return true;
+    else
+        return false;
+}
+bool operator>(const Path& a, const Path& b)
+{
+    if (a.getWeight() > b.getWeight())
         return true;
     else
         return false;
@@ -88,7 +95,7 @@ bool operator<(const Path& a, const Path& b)
 
 Path Node::dijkstra(Node* target)
 {
-    priority_queue<Path> pathQueue;
+    priority_queue<Path, vector<Path>, greater<Path>> pathQueue;
     Path currentPath;
     dijkstra(pathQueue, currentPath);  // visit this Node first
 
@@ -103,7 +110,7 @@ Path Node::dijkstra(Node* target)
     return currentPath;
 }
 
-void Node::dijkstra(priority_queue<Path>& pathQueue, Path current)
+void Node::dijkstra(priority_queue<Path, vector<Path>, greater<Path>>& pathQueue, Path current)
 {
     if (visited)
         return;

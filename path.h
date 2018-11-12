@@ -18,7 +18,7 @@ public:
 
     void push_back(Edge* edge);
     Edge* back();
-    float getWeight();
+    float getWeight() const;
 };
 
 #endif // PATH_H

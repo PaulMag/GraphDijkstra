@@ -32,7 +32,7 @@ Edge *Path::back()
     return edges.back();
 }
 
-float Path::getWeight()
+float Path::getWeight() const
 {
     float weight = 0;
     for (unsigned i=0; i<edges.size(); i++){
