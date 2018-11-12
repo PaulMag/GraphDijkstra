@@ -4,6 +4,7 @@
 #include <iostream>
 #include <vector>
 class Edge;
+class Path;
 #include <queue>
 
 using namespace std;
@@ -17,7 +18,6 @@ public:
     string name;
     vector<Edge*> edges;
     bool visited = false;
-    typedef vector<Edge*> Path;
 
     void connect(Node* other, float w);
     void connectBi(Node* other, float w);

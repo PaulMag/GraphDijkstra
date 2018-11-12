@@ -2,6 +2,7 @@
 #include "graph.h"
 #include "node.h"
 #include "edge.h"
+#include "path.h"
 
 using namespace std;
 
@@ -23,11 +24,12 @@ int main()
     myGraph.find("D")->traverse();
 
     cout << endl;
-    vector<Edge*> path = myGraph.find("C")->dijkstra(myGraph.find("D"));
-    for (unsigned i=0; i<path.size(); i++) {
-        cout << path[i]->fromNode->name << path[i]->toNode->name << " " << path[i]->weight << endl;
-
+    Path path = myGraph.find("C")->dijkstra(myGraph.find("D"));
+    vector<Edge*> edges = path.edges;
+    for (unsigned i=0; i<edges.size(); i++) {
+        cout << edges[i]->fromNode->name << edges[i]->toNode->name << " " << edges[i]->weight << endl;
     }
+    cout << "Total weight: " << path.getWeight() << endl;
 
     return 0;
 }

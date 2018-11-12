@@ -7,9 +7,11 @@ SOURCES += \
     main.cpp \
     node.cpp \
     edge.cpp \
-    graph.cpp
+    graph.cpp \
+    path.cpp
 
 HEADERS += \
     node.h \
     edge.h \
-    graph.h
+    graph.h \
+    path.h

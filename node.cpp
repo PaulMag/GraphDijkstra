@@ -1,5 +1,6 @@
 #include "node.h"
 #include "edge.h"
+#include "path.h"
 #include <algorithm>
 
 
@@ -77,7 +78,15 @@ void Node::traverse(vector<Node*> path, float weightTotal)
     }
 }
 
-Node::Path Node::dijkstra(Node* target)
+bool operator<(const Path& a, const Path& b)
+{
+    if (a.edges.size() < b.edges.size())
+        return true;
+    else
+        return false;
+}
+
+Path Node::dijkstra(Node* target)
 {
     priority_queue<Path> pathQueue;
     visited = true;
@@ -98,13 +107,13 @@ Node::Path Node::dijkstra(Node* target)
     return currentPath;
 }
 
-void Node::dijkstra(priority_queue<Node::Path>& pathQueue, Path current)
+void Node::dijkstra(priority_queue<Path>& pathQueue, Path current)
 {
     if (visited)
         return;
     visited = true;
     for (unsigned i=0; i<edges.size(); i++){
-        Path path(current);  // makes a copy of the Path so far
+        Path path(current.edges);  // makes a copy of the Path so far
         path.push_back(edges[i]);  // expands the Path by adding a new Edge
         pathQueue.push(path);  // add the new Path into the queue
     }
