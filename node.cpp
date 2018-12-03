@@ -78,6 +78,7 @@ void Node::traverse(vector<Node*> path, float weightTotal)
     }
 }
 
+/// Explicitly define larger than and smaller than operators for priority_queue
 bool operator<(const Path& a, const Path& b)
 {
     if (a.getWeight() < b.getWeight())
@@ -94,6 +95,9 @@ bool operator>(const Path& a, const Path& b)
 }
 
 Path Node::dijkstra(Node* target)
+/* Algorithm for finding the shortest paths between two nodes in a graph.
+ * Returns the shortest Path between this Node and target Node.
+ */
 {
     priority_queue<Path, vector<Path>, greater<Path>> pathQueue;
     Path currentPath;
@@ -111,6 +115,7 @@ Path Node::dijkstra(Node* target)
 }
 
 void Node::dijkstra(priority_queue<Path, vector<Path>, greater<Path>>& pathQueue, Path current)
+/* Help function for the recursive algorithm. Should be private. */
 {
     if (visited)
         return;

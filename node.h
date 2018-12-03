@@ -25,8 +25,10 @@ public:
     void connectBi(Node* other, float w, float wReverse);
     void print();
     void traverse();
-    void traverse(vector<Node*> path, float weightTotal);
     Path dijkstra(Node* target);
+
+private:
+    void traverse(vector<Node*> path, float weightTotal);
     void dijkstra(priority_queue<Path, vector<Path>, greater<Path>>& pathQueue, Path current);
 };
 
